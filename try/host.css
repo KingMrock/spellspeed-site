@@ -1,0 +1,138 @@
+/* Spellspeed "Try it" host page. The search panel itself is styled by spellspeed/night.css, as in DuelingBook. */
+.ss-try { padding-bottom: 32px; }
+.ss-intro { padding-top: 28px; padding-bottom: 12px; }
+.ss-intro h1 { font-size: clamp(28px, 4vw, 40px); margin-bottom: 10px; }
+.ss-intro .lead { margin: 0 0 8px; }
+.ss-hint output { color: var(--accent); margin-left: 6px; }
+.ss-feedback { margin: 4px 0 0; }
+.ss-phone { display: none; }
+html.ss-narrow .ss-phone { display: inline; }
+html.ss-narrow .ss-desk { display: none; }
+.ss-about { padding-top: 16px; }
+.ss-about .note { max-width: 80ch; }
+
+.ss-tabs { display: none; }
+html.ss-narrow .ss-tabs { display: flex; gap: 6px; padding: 0 16px 8px; position: sticky; top: 56px; z-index: 15; background: var(--bg); }
+.ss-tabs button { flex: 1; font: 600 15px/1 var(--f-body); padding: 11px 0; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg-2); color: var(--muted); }
+.ss-tabs button[aria-selected="true"] { color: #032019; background: var(--accent); border-color: var(--accent); }
+
+.ss-frame { position: relative; display: flex; justify-content: center; padding: 0 16px; }
+html.ss-narrow .ss-frame { padding: 0; }
+#ss-viewport { position: relative; overflow: clip; border-radius: 10px; border: 1px solid var(--line-2); background: #0e1a18; }
+html.ss-narrow #ss-viewport { border-radius: 0; border-inline: 0; }
+#ss-stage { position: absolute; left: 0; top: 0; width: 1024px; height: 640px; transform-origin: 0 0; }
+#deck_constructor { position: relative; width: 1024px; height: 640px; font: 11px/1.3 Arial, sans-serif; color: var(--fg); }
+#deck_constructor > .cards { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+#deck_constructor > .cards > * { pointer-events: auto; }
+.ss-note { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); width: max-content; max-width: calc(100vw - 32px); box-sizing: border-box; z-index: 30; margin: 0; padding: 10px 16px; border-radius: 8px; background: #2b1a1a; border: 1px solid #7a3b3b; color: #ffdede; font-size: 14px; }
+
+/* Card overview */
+#preview { position: absolute; left: 3px; top: 3px; width: 200px; height: 291px; overflow: hidden; border-radius: 9px; }
+#preview > .cardfront { transform: scale(.246); }
+.ss-preview-actions { position: absolute; left: 3px; top: 298px; width: 200px; display: flex; gap: 4px; }
+.ss-preview-actions button { flex: 1; height: 20px; font: 600 10px/1 Arial, sans-serif; color: #032019; background: var(--accent); border: 0; border-radius: 4px; cursor: pointer; }
+.ss-preview-actions button + button { background: var(--bg-2); color: var(--fg); border: 1px solid var(--line-2); }
+.ss-preview-actions button:disabled { opacity: .4; cursor: default; }
+#preview_txt { position: absolute; left: 3px; top: 322px; width: 200px; height: 314px; box-sizing: border-box; overflow: auto; padding: 6px 7px; white-space: pre-wrap;
+  font: 10.5px/1.35 Arial, sans-serif; color: var(--fg); background: var(--bg-2); border: 1px solid var(--line-2); border-radius: 6px; scrollbar-width: thin; }
+#preview_txt > span { display: block; margin-bottom: 6px; }
+#preview_txt .ss-pv-type { color: var(--muted); font-weight: 600; }
+
+/* Not part of the demo: Solo testing and DuelingBook's own search need the real site. */
+#deck_constructor .dblite-solo-launch, #deck_constructor .dblite-native-return,
+#deck_constructor .dblite-builder-more > button:not(.dblite-lab-open), #deck_constructor .dblite-builder-more > label:has(> select[aria-label="Pool"]) { display: none !important; }
+
+/* Deck */
+.ss-zone { position: absolute; left: 208px; width: 584px; box-sizing: border-box; padding: 4px 6px 6px; background: var(--bg-2) !important; border: 1px solid var(--line-2) !important; border-radius: 7px; }
+html #deck_constructor .ss-zone.ss-zone { background: var(--bg-2) !important; border: 1px solid var(--line-2) !important; box-shadow: none; }
+#ss-main { top: 4px; height: 440px; }
+#ss-extra { top: 448px; height: 92px; }
+#ss-sidedeck { top: 544px; height: 92px; }
+.ss-zone header { display: flex; align-items: center; gap: 6px; height: 18px; margin-bottom: 4px; font: 11px/1 Arial, sans-serif; color: var(--muted); }
+.ss-zone header b { color: var(--fg); }
+.ss-count { font-weight: 700; color: var(--accent); }
+.ss-split { flex: 1; }
+.ss-zone header select, .ss-zone header button { height: 18px; font: 10px Arial, sans-serif; color: var(--fg); background: var(--bg); border: 1px solid var(--line-2); border-radius: 4px; }
+.ss-zone header button { cursor: pointer; padding: 0 8px; }
+.ss-cards { display: flex; flex-wrap: wrap; gap: 3px; align-content: flex-start; }
+.ss-slot { position: relative; padding: 0; border: 0; background: none; cursor: pointer; width: 44px; height: 64px; overflow: hidden; border-radius: 3px; }
+.ss-slot > .cardfront { transform: scale(.0541); }
+#ss-extra .ss-slot, #ss-sidedeck .ss-slot { width: 35px; height: 51px; }
+#ss-extra .ss-slot > .cardfront, #ss-sidedeck .ss-slot > .cardfront { transform: scale(.04305); }
+.ss-slot:hover, .ss-slot:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; }
+
+/* Card faces: Spellspeed's own drawing at DuelingBook's front size (813 × 1185), scaled by their containers. */
+.cardfront { transform-origin: 0 0; }
+.ss-face { --frame: #c8703a; --ink: #fff; position: absolute; left: 0; top: 0; width: 813px; height: 1185px; box-sizing: border-box; overflow: hidden;
+  border: 16px solid #0b100f; border-radius: 34px; background: var(--frame); font-family: Georgia, "Times New Roman", serif; color: #111; cursor: pointer; }
+.ss-face > span { position: absolute; display: block; }
+.ss-normal { --frame: #c9a35a; } .ss-effect { --frame: #c8703a; } .ss-ritual { --frame: #4f7fc4; } .ss-fusion { --frame: #8b5bb0; }
+.ss-synchro { --frame: #d9dcdc; --ink: #111; } .ss-xyz { --frame: #2b2b2b; } .ss-link { --frame: #2a5d9a; } .ss-token { --frame: #9a9a9a; }
+.ss-spell { --frame: #1f8a78; } .ss-trap { --frame: #a8457f; }
+.ss-pendulum { background: linear-gradient(to bottom, var(--frame) 56%, #1f8a78 56%); }
+.ss-name { left: 34px; right: 34px; top: 28px; height: 100px; padding: 0 22px; line-height: 100px; font-size: 62px; font-weight: 700; font-variant: small-caps;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--ink); background: rgba(0, 0, 0, .18); border-radius: 10px; }
+.ss-attr, .ss-level { top: 142px; font: 700 36px/1 Arial, sans-serif; color: var(--ink); }
+.ss-attr { right: 48px; } .ss-level { left: 48px; }
+.ss-art { left: 84px; top: 196px; width: 613px; height: 613px; background: #07100e; border: 6px solid rgba(0, 0, 0, .45); overflow: hidden; }
+.ss-art img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ss-art-name { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 40px; text-align: center;
+  font: 700 96px/1.08 Georgia, serif; color: #e9f6f3; overflow-wrap: anywhere; }
+.ss-has-art .ss-art-name { display: none; }
+.ss-type { left: 44px; right: 44px; top: 832px; font: 700 32px/1.1 Arial, sans-serif; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ss-text { left: 40px; right: 40px; top: 880px; bottom: 96px; padding: 14px 18px; font: 27px/1.22 Georgia, serif; white-space: pre-wrap; overflow: hidden;
+  background: #f1ece0; border-radius: 6px; }
+.ss-stats { right: 48px; bottom: 30px; display: flex !important; gap: 40px; font: 700 42px/1 Arial, sans-serif; color: var(--ink); }
+.ss-limit { left: 22px; top: 22px; width: 150px; height: 150px; border-radius: 50%; background: #c62828; color: #fff; border: 10px solid #fff;
+  font: 700 100px/130px Arial, sans-serif; text-align: center; z-index: 2; }
+.ss-limit[hidden], .ss-limit:empty { display: none !important; }
+.ss-result:focus-visible { outline: 30px solid var(--accent); }
+/* Self-hosted card image (scripts/convert-card-art.py): the whole card, no drawn frame. */
+.ss-face.ss-image { border: 0; border-radius: 30px; background: #07100e; }
+.ss-image > img.pic { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Phone Deck tab: the zones leave the stage for a page-wide grid; cards size with the screen (5 or more per row). */
+.ss-deck-phone { padding: 0 12px; }
+.ss-deck-phone .ss-zone { position: static; width: auto; height: auto; margin: 0 0 10px; padding: 8px 8px 10px; }
+.ss-deck-phone .ss-zone header { height: auto; min-height: 30px; flex-wrap: wrap; gap: 6px 10px; margin-bottom: 8px; font-size: 14px; }
+.ss-deck-phone .ss-split { order: 5; flex-basis: 100%; font-size: 12px; }
+.ss-deck-phone .ss-zone header select, .ss-deck-phone .ss-zone header button { height: 32px; font-size: 13px; padding: 0 10px; }
+.ss-deck-phone #ss-main header select { margin-left: auto; }
+.ss-deck-phone .ss-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(56px, 1fr)); gap: 5px; min-height: 30px; }
+.ss-deck-phone .ss-cards:empty::before { content: "Empty"; color: var(--muted); font-size: 13px; }
+#ss-deck-phone .ss-slot { width: auto; height: auto; aspect-ratio: 813 / 1185; border-radius: 4px; }
+#ss-deck-phone .ss-slot > .ss-face.ss-image { width: 100%; height: 100%; transform: none; border-radius: 4px; }
+#ss-deck-phone .ss-slot > .ss-face:not(.ss-image) { transform: scale(var(--slot-scale, .07)); }
+#ss-deck-phone .ss-slot .ss-limit { left: 2px; top: 2px; width: 16px; height: 16px; border-width: 2px; font: 700 11px/12px Arial, sans-serif; }
+.ss-preview-actions button { padding: 0 2px; white-space: nowrap; }
+.ss-preview-actions #ss-remove { background: var(--bg-2); color: var(--fg); border: 1px solid var(--line-2); }
+
+/* Import / Export dialog (YDKe code and .ydk file, as DuelingBook's Import reads them). */
+#ss-io { color: #032019; background: var(--accent); border-color: var(--accent); font-weight: 700; }
+.ss-share { width: min(560px, calc(100vw - 32px)); box-sizing: border-box; padding: 20px 22px; border: 1px solid var(--line-2); border-radius: 12px; background: var(--bg-2); color: var(--fg); }
+.ss-share::backdrop { background: rgba(0, 0, 0, .6); }
+.ss-share h2 { margin: 0 0 12px; font-size: 22px; }
+.ss-share h3 { margin: 16px 0 6px; font-size: 16px; }
+.ss-share .note { margin: 0 0 10px; font-size: 14px; }
+.ss-share form { position: absolute; right: 12px; top: 12px; margin: 0; }
+.ss-share-close { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg); color: var(--fg); font-size: 16px; cursor: pointer; }
+.ss-share-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.ss-share input, .ss-share textarea { flex: 1 1 200px; min-width: 0; box-sizing: border-box; padding: 9px 10px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg); color: var(--fg); font: 13px/1.3 ui-monospace, Consolas, monospace; }
+.ss-share textarea { width: 100%; resize: vertical; }
+.ss-share button:not(.ss-share-close), .ss-file { height: 40px; padding: 0 16px; border-radius: 8px; border: 1px solid var(--line-2); background: var(--bg); color: var(--fg); font: 600 14px/38px var(--f-body); cursor: pointer; box-sizing: border-box; }
+.ss-share section { padding: 0; }
+.ss-share button.ss-primary { color: #032019; background: var(--accent); border-color: var(--accent); }
+.ss-note.ss-ok { background: #12302a; border-color: #2f7a6b; color: #dffcf5; }
+/* Drag and drop: a zone lights up while a card is held over it. */
+.ss-zone.ss-drop { outline: 2px dashed var(--accent); outline-offset: -2px; }
+
+/* Desktop: the search panel takes the width the stage's height leaves over (host.js layout, --ss-search-extra),
+   and its splitter (Spellspeed's own, on the panel's left edge) is easy to see. */
+html #deck_constructor .dblite-builder-search { width: calc(221px + var(--ss-search-extra, 0px)) !important; }
+html.dbetter-night #deck_constructor .dblite-builder-search > .dblite-search-resizer::after { background: var(--accent); opacity: .75; width: 3px; height: 40px; margin-top: -20px; }
+html.dbetter-night #deck_constructor .dblite-builder-search > .dblite-search-resizer:is(:hover, :focus-visible, .dblite-resizing)::after { background: var(--accent); opacity: 1; }
+/* Empty zones say how to fill them (desktop; the phone grid says "Empty"). */
+#deck_constructor .ss-cards:empty::before { display: block; padding: 6px 2px; color: var(--muted); font-size: 11px; }
+#deck_constructor #ss-main .ss-cards:empty::before { content: "Double-click, right-click or drag a card from the search to add it. Import / Export brings a deck in."; }
+#deck_constructor #ss-extra .ss-cards:empty::before { content: "Fusion, Synchro, Xyz and Link Monsters come here."; }
+#deck_constructor #ss-sidedeck .ss-cards:empty::before { content: "Shift + double-click or drag a card here."; }

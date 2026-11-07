@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Spellspeed: the free DuelingBook extension</title>
+<meta name="description" content="Spellspeed is a free extension that makes DuelingBook faster and cleaner: drag-and-drop plays, card fans, a replay timeline you can rewind, themes and a smarter deck builder.">
+<link rel="canonical" href="https://spellspeed.com/">
+<meta name="theme-color" content="#0b1413">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icon32.png" sizes="32x32">
+<link rel="icon" href="assets/app-icon-512.png" sizes="512x512">
+<link rel="apple-touch-icon" href="assets/app-icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Spellspeed">
+<meta property="og:title" content="Spellspeed for DuelingBook">
+<meta property="og:description" content="Play DuelingBook at Spell Speed 2. Free, open source, no tracking.">
+<meta property="og:image" content="https://spellspeed.com/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://spellspeed.com/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@spellspeedapp">
+<script type="application/ld+json">
+[{"@context":"https://schema.org","@type":"WebSite","name":"Spellspeed","alternateName":["Spellspeed for DuelingBook","spellspeed.com"],"url":"https://spellspeed.com/"},
+{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Spellspeed","alternateName":"Spellspeed for DuelingBook","applicationCategory":"BrowserApplication","operatingSystem":"Chrome, Edge, Brave, Opera, Android","description":"Free, open-source extension that makes DuelingBook faster and cleaner: drag-and-drop plays, card fans, a replay timeline, themes and a smarter deck builder.","url":"https://spellspeed.com/","image":"https://spellspeed.com/assets/og-image.png","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"sameAs":["https://x.com/spellspeedapp","https://www.instagram.com/spellspeedapp/","https://github.com/KingMrock/spellspeed"]}]
+</script>
+<link rel="preload" href="fonts/sora.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=4">
+<script src="deck.js?v=4" defer></script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <!-- Spellspeed's own card-type icons; deliberately not Konami's property icons. -->
+  <symbol id="orb" viewBox="0 0 64 64"><g transform="translate(5 0) skewX(-10)"><rect x="15" y="7" width="34" height="50" rx="5" fill="#e9f6f3"/><path d="M23 21 L33 32 L23 43 M34 21 L44 32 L34 43" stroke="#0b3c66" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></symbol>
+  <symbol id="i-cont" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5A7 7 0 1 0 19 13"/><path d="M14.5 8.5H19V4"/></g></symbol>
+  <symbol id="i-quick" viewBox="0 0 24 24"><path d="M5 6l6 6-6 6M12 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-field" viewBox="0 0 24 24"><g fill="currentColor"><rect x="3" y="5" width="5" height="6" rx="1"/><rect x="9.5" y="5" width="5" height="6" rx="1"/><rect x="16" y="5" width="5" height="6" rx="1"/><rect x="3" y="13" width="5" height="6" rx="1" opacity=".55"/><rect x="9.5" y="13" width="5" height="6" rx="1" opacity=".55"/><rect x="16" y="13" width="5" height="6" rx="1" opacity=".55"/></g></symbol>
+  <symbol id="i-equip" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M10 14l4-4"/><path d="M8.5 11.5l-2 2a3.5 3.5 0 0 0 5 5l2-2"/><path d="M15.5 12.5l2-2a3.5 3.5 0 0 0-5-5l-2 2"/></g></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./" aria-label="Spellspeed home"><img src="assets/mark.svg" alt=""><span class="wordmark">spellspeed</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="#deck">Features</a>
+      <a href="try/">Try it</a>
+      <a href="android.html">Android</a>
+      <a href="#rulings">Rulings</a>
+      <a href="#community">Community</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="https://chromewebstore.google.com/detail/fcaoibhakcgpbjickjgpdpdpnfdikdnn">Add to Chrome</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="hero-copy">
+      <h1>Play DuelingBook at <em>Spell Speed&nbsp;2.</em></h1>
+      <p class="lead">Spellspeed is a free extension that makes DuelingBook faster and easier on the eyes. Drag cards to play them, see your whole Deck at a glance, rewind any replay, and build decks with a search that finds the right card.</p>
+      <div class="ctas" id="install">
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/fcaoibhakcgpbjickjgpdpdpnfdikdnn">Add to Chrome <small>free</small></a>
+        <a class="btn btn-ghost" href="try/">Try the deck builder</a>
+        <a class="btn btn-ghost" href="android.html">Get the Android app</a>
+      </div>
+      <p class="note">Chrome, Edge, Brave and Opera on a computer, and Android.</p>
+    </div>
+    <figure class="shot">
+      <img src="assets/hero-090.webp" width="1228" height="765" alt="A Solo duel with Spellspeed in the Night theme: the Deck opened as a sorted fan in the middle of the field, next to the card overview.">
+      <figcaption>A Solo duel with a Power Patron deck: the Deck opened as a fan, searchable and sorted.</figcaption>
+    </figure>
+  </div>
+
+  <section id="deck">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Six Spells for DuelingBook</h2>
+        <p>Every action they take is one of DuelingBook's own; they just resolve faster. Pick a card to read it.</p>
+      </div>
+      <div class="deckview" data-deck>
+        <div class="deck-preview" aria-live="polite"></div>
+        <div class="deck-side">
+          <div class="deck-bar"><b>Main Deck</b><span class="count">6 cards</span></div>
+          <div class="deck-grid" role="group" aria-label="Main Deck"></div>
+        </div>
+      </div>
+      <noscript><p class="note">Drag and Drop · Card Fans · Deck Builder · Replay Timeline · Four Themes · Android app</p></noscript>
+      <template data-card="Drag and Drop">
+        <article class="ycard" aria-label="Drag and Drop, Continuous Spell">
+          <h3 class="ycard-name">Drag and Drop</h3>
+          <span class="ycard-orb" aria-hidden="true"><i>SPELL</i><b>魔</b></span>
+          <p class="ycard-type">[Spell Card <svg aria-hidden="true"><use href="#i-cont"/></svg>]</p>
+          <div class="ycard-art"><img src="assets/drag-drop-090.webp" width="600" height="600" alt="A monster dragged from the hand onto the field, each zone showing what a drop there does" style="object-position:center"></div>
+          <span class="ycard-code">SPSD-001</span>
+          <div class="ycard-text"><p>Drag a card to a zone to Summon, Set, attack, send it to the GY, banish it or return it to the Deck. Hold Shift, Alt or Ctrl to change how it is played. <span class="negate">You can negate this card's effects in the settings.</span></p></div>
+          <span class="ycard-foot">Spellspeed 0.9</span>
+        </article>
+        <ul class="deck-details"><li><b>Continuous Spell</b></li><li><span class="kbd">Shift</span> Defense Position · <span class="kbd">Alt</span> Set · <span class="kbd">Ctrl</span> Normal Summon</li><li>A right-click menu with every action, or DuelingBook's hover menu</li><li>Shortcut keys you can remap</li><li>Mill or banish several cards from the top of the Deck at once</li></ul>
+      </template>
+      <template data-card="Card Fans">
+        <article class="ycard" aria-label="Card Fans, Continuous Spell">
+          <h3 class="ycard-name">Card Fans</h3>
+          <span class="ycard-orb" aria-hidden="true"><i>SPELL</i><b>魔</b></span>
+          <p class="ycard-type">[Spell Card <svg aria-hidden="true"><use href="#i-cont"/></svg>]</p>
+          <div class="ycard-art"><img src="assets/deck-fan-090.webp" width="489" height="525" alt="The Deck opened as a sorted fan of cards" style="object-position:center"></div>
+          <span class="ycard-code">SPSD-002</span>
+          <div class="ycard-text"><p>Your Deck, Extra Deck, GY and banished cards open as fans or grids. Search and sort them, or click a name in card text to list every card that matches. <span class="negate">You can negate this card's effects in the settings.</span></p></div>
+          <span class="ycard-foot">Spellspeed 0.9</span>
+        </article>
+        <ul class="deck-details"><li><b>Continuous Spell</b></li><li>Fan or Grid view, with search and sorting</li><li>Move and resize the viewer; it stays where you put it</li><li>Click names, archetypes and stats like "Level 4 or lower" in card text</li><li>Action history for both players</li></ul>
+      </template>
+      <template data-card="Deck Builder">
+        <article class="ycard" aria-label="Deck Builder, Normal Spell">
+          <h3 class="ycard-name">Deck Builder</h3>
+          <span class="ycard-orb" aria-hidden="true"><i>SPELL</i><b>魔</b></span>
+          <p class="ycard-type">[Spell Card]</p>
+          <div class="ycard-art"><img src="assets/deck-builder-090.webp" width="1224" height="765" alt="The deck constructor: card preview with clickable card text, the deck and the card search" style="object-position:12% center"></div>
+          <span class="ycard-code">SPSD-003</span>
+          <div class="ycard-text"><p>Search by type, frame, Attribute, ATK/DEF and effect. Access: list the cards that can add this card from the Deck. Summon Lab: list what your monsters can Summon. <span class="negate">You can negate this card's effects in the settings.</span></p></div>
+          <span class="ycard-foot">Spellspeed 0.9</span>
+        </article>
+        <ul class="deck-details"><li><b>Normal Spell</b></li><li>Effect filters: hand traps, searchers, negation and more</li><li><b>Access</b>: every card that can get this one out of the Deck</li><li><b>Summon Lab</b>: Fusion, Synchro, Xyz and Link recipes from the monsters you pick</li><li>Undo with <span class="kbd">Ctrl Z</span>, and Solo with a chosen opening hand</li><li><a href="try/">Try it in your browser</a>, no install</li></ul>
+      </template>
+      <template data-card="Replay Timeline">
+        <article class="ycard" aria-label="Replay Timeline, Quick-Play Spell">
+          <h3 class="ycard-name">Replay Timeline</h3>
+          <span class="ycard-orb" aria-hidden="true"><i>SPELL</i><b>魔</b></span>
+          <p class="ycard-type">[Spell Card <svg aria-hidden="true"><use href="#i-quick"/></svg>]</p>
+          <div class="ycard-art"><img src="assets/timeline-art.svg" width="400" height="400" alt="The replay timeline: a slider with turn marks and playback buttons"></div>
+          <span class="ycard-code">SPSD-004</span>
+          <div class="ycard-text"><p>During any replay: slide to any play, step back one play or one turn, or play at up to 4×. Plays you have already seen are instant. <span class="negate">You can negate this card's effects in the settings.</span></p></div>
+          <span class="ycard-foot">Spellspeed 0.9</span>
+        </article>
+        <ul class="deck-details"><li><b>Quick-Play Spell</b></li><li>Slide to any play, or click a turn mark</li><li>One play or one turn back and forward</li><li>1×, 2× and 4×, with the duel's sounds</li><li><span class="kbd">Space</span> or <span class="kbd">K</span> to play and pause</li></ul>
+      </template>
+      <template data-card="Four Themes">
+        <article class="ycard" aria-label="Four Themes, Field Spell">
+          <h3 class="ycard-name">Four Themes</h3>
+          <span class="ycard-orb" aria-hidden="true"><i>SPELL</i><b>魔</b></span>
+          <p class="ycard-type">[Spell Card <svg aria-hidden="true"><use href="#i-field"/></svg>]</p>
+          <div class="ycard-art"><img src="assets/themes-090.webp" width="800" height="800" alt="The same duel in the four themes: Night, Classic, Abyss and Ember"></div>
+          <span class="ycard-code">SPSD-005</span>
+          <div class="ycard-text"><p>The field becomes Night, Classic, Abyss or Ember. Card artwork is never tinted. You can also keep DuelingBook's own look and use only the shortcuts. <span class="negate">You can negate this card's effects in the settings.</span></p></div>
+          <span class="ycard-foot">Spellspeed 0.9</span>
+        </article>
+        <ul class="deck-details"><li><b>Field Spell</b></li><li>Night, Classic, Abyss and Ember</li><li>The Classic look: DuelingBook's own layout, with the shortcuts kept</li><li>Panels, menus and the deck constructor follow the theme</li></ul>
+      </template>
+      <template data-card="In Your Pocket">
+        <article class="ycard" aria-label="In Your Pocket, Equip Spell">
+          <h3 class="ycard-name">In Your Pocket</h3>
+          <span class="ycard-orb" aria-hidden="true"><i>SPELL</i><b>魔</b></span>
+          <p class="ycard-type">[Spell Card <svg aria-hidden="true"><use href="#i-equip"/></svg>]</p>
+          <div class="ycard-art"><img src="assets/phone-art.svg" width="400" height="400" alt="A phone held sideways running Spellspeed"></div>
+          <span class="ycard-code">SPSD-006</span>
+          <div class="ycard-text"><p>Equip only to an Android phone. Buttons are sized for a finger, the replay timeline follows your thumb, and DuelingBook links open in the app. <span class="negate">You can negate this card's effects in the settings.</span></p></div>
+          <span class="ycard-foot">Spellspeed 0.9</span>
+        </article>
+        <ul class="deck-details"><li><b>Equip Spell</b></li><li>Buttons sized for a finger</li><li>A replay timeline you slide with your thumb</li><li>Replay links from Discord open in the app</li><li>Android 8 or newer · <a href="android.html">Get the app</a></li></ul>
+      </template>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="promises">
+        <div><b>No tracking</b><p>No account, no analytics, no ads. Your settings stay in your browser. <a href="privacy.html">Privacy policy</a></p></div>
+        <div><b>Open source</b><p>Free software under the GPL-3.0 licence. Every line is public on GitHub.</p></div>
+        <div><b>Only on DuelingBook</b><p>Spellspeed runs on duelingbook.com and talks to nobody but DuelingBook. Your login never leaves DuelingBook.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rulings">
+    <div class="wrap narrow">
+      <div class="section-head"><h2>Rulings</h2><p>The questions players ask first.</p></div>
+      <div class="rulings">
+        <details>
+          <summary>Does Spellspeed play for me?</summary>
+          <p>No. It automates no plays and adds no card effects. Every action is one you choose, sent through DuelingBook's own duel commands, as if you had clicked DuelingBook's buttons.</p>
+          <p>Spellspeed is an unofficial extension, not affiliated with or endorsed by DuelingBook.</p>
+        </details>
+        <details>
+          <summary>Is it free?</summary>
+          <p>Yes, and open source. There is nothing to buy and no account to create.</p>
+        </details>
+        <details>
+          <summary>Can it see my password or my decks?</summary>
+          <p>Spellspeed has no server and sends nothing to us. Its only permission is to save its own settings, it runs only on duelingbook.com, and its code is public.</p><p>One button touches your login: when DuelingBook says you are already logged in elsewhere, <b>Close it and connect</b> sends DuelingBook's own Reconnect, with the login DuelingBook already keeps in the page, to DuelingBook's duel server. Only when you press it, and nowhere else. Details are in the <a href="privacy.html">privacy policy</a>.</p>
+        </details>
+        <details>
+          <summary>I use DuelingBook Overflow or Dueling Book Enhancer.</summary>
+          <p>Turn off DuelingBook Overflow: both change the same parts of the page. Dueling Book Enhancer works alongside Spellspeed; turn off its Advanced Replay Controls, since Spellspeed brings its own replay timeline.</p>
+        </details>
+        <details>
+          <summary>Firefox, Safari or iPhone?</summary>
+          <p>Firefox is next, on computers and on Android. Safari and iPhone are not supported yet. Today Spellspeed runs in Chrome, Edge, Brave and Opera on a computer, and as an Android app.</p>
+        </details>
+        <details>
+          <summary>I don't like a change. Can I turn it off?</summary>
+          <p>Every feature has its own switch in the settings (the Spellspeed button in your browser's toolbar), and each category can be turned off at once. Turning a feature off brings back DuelingBook's own behaviour.</p>
+        </details>
+        <details>
+          <summary>Something broke. Where do I report it?</summary>
+          <p>In the bug reports on our <a href="https://discord.gg/m5qKsv8ZST">Discord</a>, or by email to contact@spellspeed.com. Say what you did, what you expected and what happened; for replays, the replay link and the play number help most.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="community" class="band">
+    <div class="wrap cta">
+      <h2>Your move.</h2>
+      <div class="ctas">
+        <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/fcaoibhakcgpbjickjgpdpdpnfdikdnn">Add to Chrome <small>free</small></a>
+        <a class="btn btn-ghost" href="try/">Try the deck builder</a>
+        <a class="btn btn-ghost" href="https://discord.gg/m5qKsv8ZST">Join the Discord</a>
+      </div>
+      <p class="note">Updates on <a href="https://x.com/spellspeedapp">X</a> and <a href="https://www.instagram.com/spellspeedapp/">Instagram</a>: @spellspeedapp.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <a class="brand" href="./"><img src="assets/mark.svg" alt=""><span class="wordmark">spellspeed</span></a>
+      <nav class="foot-links" aria-label="Footer">
+        <a href="android.html">Android app</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="https://x.com/spellspeedapp">X</a>
+        <a href="https://www.instagram.com/spellspeedapp/">Instagram</a>
+        <a href="https://github.com/KingMrock/spellspeed">GitHub</a>
+        <a href="https://discord.gg/m5qKsv8ZST">Discord</a>
+      </nav>
+    </div>
+    <div class="fine">
+      <p>Contact: contact@spellspeed.com</p>
+      <p>Spellspeed is an independent project, not affiliated with or endorsed by DuelingBook or Konami. Yu-Gi-Oh! is a trademark of Konami. Card images belong to their owners and appear as DuelingBook shows them.</p>
+      <p>Thanks to DuelingBook Overflow (C. Diserio) and eyal282's Dueling Book Unlock, whose GPL code Spellspeed builds on; the Fuwalab simulator, which inspired the card fans; and YGOResources by the YGOrganization team for card lookups.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

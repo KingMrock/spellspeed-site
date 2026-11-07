@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" class="dbetter-night dbetter-dark-boxes dblite-constructor-layout" data-dbetter-theme="night">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Try the Spellspeed deck builder</title>
+<link rel="canonical" href="https://spellspeed.com/try/">
+<meta name="description" content="Try Spellspeed's deck builder in your browser: fast card search, Access, Starters and the Summon Lab, with the whole card catalog.">
+<meta name="theme-color" content="#0b1413">
+<link rel="icon" href="../assets/mark.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/icon32.png" sizes="32x32">
+<link rel="preload" href="cards.json" as="fetch" crossorigin>
+<link rel="stylesheet" href="../style.css?v=4">
+<link rel="stylesheet" href="spellspeed/night.css">
+<link rel="stylesheet" href="host.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="Spellspeed home"><img src="../assets/mark.svg" alt=""><span class="wordmark">spellspeed</span></a>
+    <nav class="nav" aria-label="Main">
+      <a href="../#deck">Features</a>
+      <a href="./" aria-current="page">Try it</a>
+      <a href="../android.html">Android</a>
+    </nav>
+    <a class="btn btn-primary btn-sm" href="https://chromewebstore.google.com/detail/fcaoibhakcgpbjickjgpdpdpnfdikdnn">Add to Chrome</a>
+  </div>
+</header>
+
+<main class="ss-try">
+  <div class="wrap ss-intro">
+    <h1>Try the deck builder</h1>
+    <p class="lead">This is Spellspeed's own card search, running on the whole card catalog. Search by text, type and stats, click <b>Access</b> or <b>Starters</b> under a card, or open the <b>🌀 Summon Lab</b> to see what your monsters can make.</p>
+    <p class="note ss-hint"><span class="ss-desk">Hover a result to read it · double-click, right-click or drag it to add it · <span class="kbd">Shift</span> sends it to the Side · right-click a deck card to remove it · <span class="kbd">Ctrl Z</span> undoes.</span><span class="ss-phone">Tap a card to read it, double-tap to add it. Use the tabs to switch views.</span> <output id="ss-loading">Loading the cards…</output></p>
+    <p class="note ss-feedback">Found a bug, or missing something? Tell us in the bug reports on <a href="https://discord.gg/m5qKsv8ZST">Discord</a> or at <a href="mailto:contact@spellspeed.com?subject=Spellspeed%20Try%20it">contact@spellspeed.com</a>.</p>
+  </div>
+
+  <div class="ss-tabs" id="ss-tabs" role="tablist" aria-label="View">
+    <button type="button" role="tab" data-view="card">Card</button>
+    <button type="button" role="tab" data-view="deck">Deck</button>
+    <button type="button" role="tab" data-view="search">Search</button>
+  </div>
+
+  <div class="ss-frame">
+    <div id="ss-viewport">
+      <div id="ss-stage">
+        <div id="deck_constructor">
+          <div id="preview">
+            <div class="ss-big cardfront"></div>
+            <span class="name_txt" hidden></span>
+          </div>
+          <div class="ss-preview-actions">
+            <button type="button" id="ss-add" disabled>＋ Deck</button>
+            <button type="button" id="ss-side" disabled>＋ Side</button>
+            <button type="button" id="ss-remove" disabled title="Remove one copy from the deck">− Remove</button>
+          </div>
+          <div id="preview_txt" class="textarea"></div>
+
+          <section class="deck_bg ss-zone" id="ss-main" aria-label="Main Deck">
+            <header><b>Main Deck</b> <span class="ss-count">0</span> <span class="ss-split"></span>
+              <select id="banlists" aria-label="Banlist"></select>
+              <button type="button" id="ss-io">Import / Export</button>
+              <button type="button" id="ss-clear">Clear</button></header>
+            <div class="ss-cards"></div>
+          </section>
+          <section class="extra_bg ss-zone" id="ss-extra" aria-label="Extra Deck">
+            <header><b>Extra</b> <span class="ss-count">0</span></header><div class="ss-cards"></div>
+          </section>
+          <section class="side_bg ss-zone" id="ss-sidedeck" aria-label="Side Deck">
+            <header><b>Side</b> <span class="ss-count">0</span></header><div class="ss-cards"></div>
+          </section>
+          <div class="cards"></div>
+
+          <!-- Option lists Spellspeed reads to build its filters (DuelingBook's search keeps the same values). -->
+          <div id="search" hidden>
+            <select class="card_cb"><option value=""></option><option>Monster</option><option>Spell</option><option>Trap</option></select>
+            <select class="card2_cb"><option value=""></option><option>Normal</option><option>Effect</option><option>Ritual</option><option>Fusion</option><option>Synchro</option><option>Xyz</option><option>Link</option><option>Pendulum</option></select>
+            <select class="type2_cb"><option value=""></option><option>Flip</option><option>Gemini</option><option>Spirit</option><option>Toon</option><option>Tuner</option><option>Union</option></select>
+            <select class="attrib_cb"><option value=""></option><option>DARK</option><option>DIVINE</option><option>EARTH</option><option>FIRE</option><option>LIGHT</option><option>WATER</option><option>WIND</option></select>
+            <select class="limit_cb"><option value=""></option><option>0</option><option>1</option><option>2</option><option>3</option></select>
+            <select class="custom_cb"><option value="0">Official Cards Only</option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p id="ss-note" class="ss-note" role="status" hidden></p>
+  </div>
+  <!-- Phone: the deck zones move here from the stage (host.js placeZones). -->
+  <div id="ss-deck-phone" class="ss-deck-phone" hidden></div>
+
+  <!-- YDKe and .ydk: the formats DuelingBook's own Import reads (host.js, Import and export). -->
+  <dialog id="ss-share" class="ss-share" aria-labelledby="ss-share-title">
+    <form method="dialog"><button class="ss-share-close" aria-label="Close">✕</button></form>
+    <h2 id="ss-share-title">Import / Export</h2>
+    <section>
+      <h3>Take this deck to DuelingBook</h3>
+      <p class="note">In DuelingBook's deck constructor, click <b>Import</b>, choose <b>YDKe Code</b> and paste the code, then save the deck. The .ydk file works too: <b>Import</b> → <b>YDK or XML file</b>.</p>
+      <div class="ss-share-row"><input id="ss-ydke-out" readonly aria-label="YDKe code"><button type="button" id="ss-copy" class="ss-primary">Copy code</button></div>
+      <div class="ss-share-row"><button type="button" id="ss-download">Download .ydk</button></div>
+    </section>
+    <section>
+      <h3>Bring a deck in</h3>
+      <p class="note">Paste a YDKe code (in DuelingBook: <b>Export</b> → <b>YDK Code</b>) or the text of a .ydk file, or open a .ydk file. It replaces the deck here.</p>
+      <textarea id="ss-import-text" rows="3" aria-label="YDKe code or .ydk text" placeholder="ydke://…"></textarea>
+      <div class="ss-share-row"><button type="button" id="ss-import" class="ss-primary">Import</button><label class="ss-file" tabindex="0">Open .ydk<input type="file" id="ss-import-file" accept=".ydk,.txt,text/plain" hidden></label></div>
+    </section>
+  </dialog>
+
+  <div class="wrap ss-about">
+    <p class="note">Card search, Access, Starters and the Summon Lab read the card texts; they are not rules-complete. Your deck stays in this browser. In DuelingBook, Spellspeed adds the same search to the real deck constructor, with drag and drop, saving and Solo testing.</p>
+    <p class="note ss-credit">Card data and images: <a href="https://ygoprodeck.com/">YGOPRODeck</a>, thank you. <span id="ss-data-version"></span></p>
+    <p class="note">Yu-Gi-Oh! is a trademark of Konami Digital Entertainment and 4K Media. Card names, texts and images belong to their owners. Spellspeed is a fan project, not affiliated with Konami, DuelingBook or YGOPRODeck.</p>
+  </div>
+</main>
+
+<script src="spellspeed/jquery.min.js"></script>
+<script src="host.js"></script>
+<script src="spellspeed/rules.js"></script>
+<script src="spellspeed/constructor.js"></script>
+<script src="spellspeed/content.js" data-settings='{"previewLinks":true,"adaptiveLayout":false,"adaptiveConstructor":false,"touchLayout":false,"touchControls":false,"sounds":false,"autoRps":false,"retryLogin":false,"blockAutoFocus":false,"shortcuts":false}'></script>
+</body>
+</html>
