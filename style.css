@@ -192,3 +192,35 @@ footer .wrap { display: grid; gap: 22px; }
 .foot-links a { color: var(--fg); text-decoration: none; }
 .foot-links a:hover { color: var(--accent); }
 .fine { display: grid; gap: 6px; max-width: 90ch; }
+
+/* Watch: the 1-minute overview (self-hosted), the long tour and the shorts (YouTube links, added as they go public).
+   An <a> without href is not public yet: it shows its data-soon text, or "Soon" on a short. */
+.film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; }
+.watch-more { display: grid; gap: 20px; margin-top: 40px; }
+.tour { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 24px; align-items: center; padding: 14px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--bg); color: var(--fg); text-decoration: none; }
+.tour img { width: 100%; height: auto; border-radius: 6px; }
+.tour-copy { display: grid; gap: 8px; justify-items: start; }
+.tour-copy b { font: 600 22px/1.25 var(--f-display); letter-spacing: -.01em; }
+.tag { font: 600 13px/1 var(--f-display); color: var(--accent); text-transform: uppercase; letter-spacing: .06em; }
+.watch-on { font-weight: 600; color: var(--link); }
+.watch-on::after { content: " →"; }
+.tour:not([href]) .watch-on { font-size: 0; color: var(--accent); }
+.tour:not([href]) .watch-on::before { content: attr(data-soon); font-size: 15px; border: 1px dashed var(--accent); border-radius: 6px; padding: 6px 10px; display: inline-block; }
+.tour:not([href]) .watch-on::after { content: none; }
+.tour[href]:hover, .short[href]:hover { border-color: var(--accent); }
+.shorts-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; margin-top: 12px; }
+.shorts-head h3 { font-size: 22px; }
+.shorts { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.short { display: grid; align-content: start; gap: 4px; height: 100%; box-sizing: border-box; padding: 10px 10px 14px; border: 1px solid var(--line-2); border-radius: 10px; background: var(--bg); color: var(--fg); text-decoration: none; }
+.short img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: top; border-radius: 6px; margin-bottom: 6px; }
+.short b { font: 600 16px/1.3 var(--f-display); }
+.short span { font-size: 14px; line-height: 1.4; color: var(--muted); }
+.short:not([href]) b::after { content: "Soon"; margin-left: 8px; font: 600 12px/1 var(--f-body); color: var(--accent); border: 1px dashed var(--accent); border-radius: 5px; padding: 3px 6px; vertical-align: 2px; white-space: nowrap; }
+.short[href] b::after { content: "▶"; margin-left: 8px; font-size: 11px; color: var(--accent); vertical-align: 2px; }
+@media (max-width: 900px) {
+  .shorts { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: minmax(150px, 42%); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; }
+  .shorts li { scroll-snap-align: start; }
+}
+@media (max-width: 640px) {
+  .tour { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+}

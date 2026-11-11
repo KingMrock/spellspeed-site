@@ -26,7 +26,7 @@
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Spellspeed","alternateName":"Spellspeed for DuelingBook","applicationCategory":"BrowserApplication","operatingSystem":"Chrome, Edge, Brave, Opera, Firefox, Android","description":"Free, open-source extension that makes DuelingBook faster and cleaner: drag-and-drop plays, card fans, a replay timeline, themes and a smarter deck builder.","url":"https://spellspeed.com/","image":"https://spellspeed.com/assets/og-image.png","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"sameAs":["https://x.com/spellspeedapp","https://www.instagram.com/spellspeedapp/","https://github.com/KingMrock/spellspeed"]}]
 </script>
 <link rel="preload" href="fonts/sora.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 <script src="deck.js?v=4" defer></script>
 </head>
 <body>
@@ -43,6 +43,7 @@
   <div class="wrap">
     <a class="brand" href="./" aria-label="Spellspeed home"><img src="assets/mark.svg" alt=""><span class="wordmark">spellspeed</span></a>
     <nav class="nav" aria-label="Main">
+      <a href="#watch">Watch</a>
       <a href="#deck">Features</a>
       <a href="try/">Try it</a>
       <a href="android.html">Android</a>
@@ -62,7 +63,7 @@
         <a class="btn btn-primary" href="https://chromewebstore.google.com/detail/fcaoibhakcgpbjickjgpdpdpnfdikdnn">Add to Chrome <small>free</small></a>
         <a class="btn btn-ghost" href="https://addons.mozilla.org/firefox/addon/spellspeed/">Add to Firefox</a>
         <a class="btn btn-ghost" href="try/">Try the deck builder</a>
-        <a class="btn btn-ghost" href="android.html">Get the Android app</a>
+        <a class="btn btn-ghost" href="android.html#download">Get the Android app</a>
       </div>
       <p class="note">Chrome, Edge, Brave, Opera and Firefox on a computer, and Android.</p>
     </div>
@@ -71,6 +72,46 @@
       <figcaption>A Solo duel with a Power Patron deck: the Deck opened as a fan, searchable and sorted.</figcaption>
     </figure>
   </div>
+
+  <section id="watch" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>See it in a minute</h2>
+        <p>Every feature in 74 seconds. The sound is off; turn it on for the music.</p>
+      </div>
+      <figure class="shot film">
+        <video data-autoplay muted loop playsinline controls preload="none" width="1280" height="720" poster="assets/video/overview-poster.webp" aria-label="Spellspeed in one minute: drag and drop, card fans, shortcut keys, Find a card, replays, card search, Summon Lab, Access, Starters, Ideas, Solo test hands, opening odds and siding patterns">
+          <source src="assets/video/spellspeed-overview-720p.mp4" type="video/mp4">
+        </video>
+        <figcaption>Spellspeed 0.9.2 in one minute. <a href="assets/video/spellspeed-overview-720p.mp4">Open the video</a> (MP4, 5.7 MB)</figcaption>
+      </figure>
+
+      <div class="watch-more">
+        <!-- Long tour: when the YouTube video is public, add href="https://www.youtube.com/watch?v=..." to the <a> below. Without href it shows "On YouTube soon". -->
+        <a class="tour">
+          <img src="assets/video/tour-thumb.webp" width="640" height="360" loading="lazy" alt="">
+          <span class="tour-copy">
+            <span class="tag">Full tour · 15 min</span>
+            <b>Every feature, step by step</b>
+            <span class="note">Card search, Access, Summon Lab, a Solo combo with drag and drop, replays, spectating and the themes, with commentary.</span>
+            <span class="watch-on" data-soon="On YouTube soon">Watch on YouTube</span>
+          </span>
+        </a>
+        <div class="shorts-head"><h3>30-second shorts</h3><p class="note">One feature each, a new one every day on YouTube.</p></div>
+        <!-- Shorts: add href="https://www.youtube.com/shorts/..." to each <a class="short"> as it goes public. Without href a card shows "Soon". -->
+        <ul class="shorts" role="list">
+          <li><a class="short"><img src="assets/video/short-dragdrop.webp" width="400" height="392" loading="lazy" alt=""><b>Drag &amp; drop</b><span>Drag a card to play it</span></a></li>
+          <li><a class="short"><img src="assets/video/short-replay.webp" width="400" height="282" loading="lazy" alt=""><b>Replays</b><span>Scrub a duel like a video</span></a></li>
+          <li><a class="short"><img src="assets/video/short-findcard.webp" width="400" height="392" loading="lazy" alt=""><b>Find a card</b><span>Look up any card mid-duel</span></a></li>
+          <li><a class="short"><img src="assets/video/short-summonlab.webp" width="400" height="392" loading="lazy" alt=""><b>Summon Lab</b><span>What can your monsters make?</span></a></li>
+          <li><a class="short"><img src="assets/video/short-access.webp" width="400" height="392" loading="lazy" alt=""><b>Access · Starters · Ideas</b><span>Every way to get a card</span></a></li>
+          <li><a class="short"><img src="assets/video/short-odds.webp" width="400" height="392" loading="lazy" alt=""><b>Opening odds</b><span>How often your hand works</span></a></li>
+          <li><a class="short"><img src="assets/video/short-siding.webp" width="400" height="392" loading="lazy" alt=""><b>Siding patterns</b><span>Your side plan, one click</span></a></li>
+          <li><a class="short"><img src="assets/video/short-spectate.webp" width="400" height="392" loading="lazy" alt=""><b>Spectating</b><span>The tools while you watch</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <section id="deck">
     <div class="wrap">
@@ -242,5 +283,20 @@
     </div>
   </div>
 </footer>
+<script>
+// The overview plays (muted) only while it is on screen; it is not loaded before that. Not with reduced motion or Save-Data.
+(() => {
+  const v = document.querySelector('video[data-autoplay]');
+  if (!v || !('IntersectionObserver' in window)) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches || (navigator.connection && navigator.connection.saveData)) return;
+  let mine = true, ours = false;
+  v.addEventListener('pause', () => { if (ours) ours = false; else if (!v.ended) mine = false; });
+  new IntersectionObserver(([e]) => {
+    if (!mine) return;
+    if (e.isIntersecting && e.intersectionRatio >= .5) v.play().catch(() => {});
+    else if (!v.paused) { ours = true; v.pause(); }
+  }, { threshold: [0, .5] }).observe(v);
+})();
+</script>
 </body>
 </html>

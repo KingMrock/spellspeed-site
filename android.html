@@ -11,7 +11,7 @@
 <link rel="icon" href="assets/icon32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="assets/app-icon-512.png">
 <link rel="preload" href="fonts/sora.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -19,6 +19,7 @@
   <div class="wrap">
     <a class="brand" href="./" aria-label="Spellspeed home"><img src="assets/mark.svg" alt=""><span class="wordmark">spellspeed</span></a>
     <nav class="nav" aria-label="Main">
+      <a href="./#watch">Watch</a>
       <a href="./#deck">Features</a>
       <a href="try/">Try it</a>
       <a href="android.html" aria-current="page">Android</a>
@@ -35,11 +36,10 @@
       <h1>DuelingBook in your <em>pocket.</em></h1>
       <p class="lead">The Spellspeed app is DuelingBook with Spellspeed built in: buttons sized for a finger, a replay timeline you slide with your thumb, and DuelingBook links that open straight in the app.</p>
       <div class="ctas" id="download">
-        <!-- TODO(launch): APK link (GitHub release asset), version, size and SHA-256 -->
-        <span class="btn btn-soon">APK coming soon <small>Android 8+</small></span>
+        <a class="btn btn-primary" href="download/Spellspeed-0.9.2.apk" download type="application/vnd.android.package-archive">Download APK <small>2.3 MB</small></a>
         <a class="btn btn-ghost" href="#install">How to install</a>
       </div>
-      <p class="note">Not on Google Play yet, so Android asks you to allow the install. The steps below take about a minute.</p>
+      <p class="note">Spellspeed 0.9.2 beta for Android 8 or newer, 2.3 MB. Not on Google Play yet, so Android asks you to allow the install. The steps below take about a minute.</p>
     </div>
   </div>
 
@@ -78,12 +78,14 @@
         </details>
         <details>
           <summary>How do I know the file is genuine?</summary>
-          <p>Download it only from spellspeed.com or our GitHub releases. Every version is signed with the same key, so Android refuses to install a modified copy over your app. Each release lists its SHA-256 checksum:</p>
-          <p class="checksum"><!-- TODO(launch): SHA-256 of the release APK -->Checksum published with the first release.</p>
+          <p>Download it only from this page. Every version is signed with the same key, so Android refuses to install a modified copy over your app. To check the file you downloaded, compare its SHA-256 checksum:</p>
+          <p class="checksum">Spellspeed-0.9.2.apk (2,401,128 bytes)<br>SHA-256 d770a2c7c5301c6d2ba7679037833523a6207f6421a9197fbcf9f9cd0027519b</p>
+          <p>Signing certificate SHA-256, the same for every version:</p>
+          <p class="checksum">2eab554d36fbc56e21cc57b05d6e3b60a63285718f7ca3fbf6f3511a5830a845</p>
         </details>
         <details>
           <summary>What does the app access?</summary>
-          <p>Only DuelingBook. It has no tracking or analytics and sends nothing to us. See the <a href="privacy.html">privacy policy</a>.</p>
+          <p>Only DuelingBook. Its one permission is internet access; links to other sites open in your browser. It has no tracking or analytics and sends nothing to us. See the <a href="privacy.html">privacy policy</a>.</p>
         </details>
         <details>
           <summary>iPhone?</summary>
